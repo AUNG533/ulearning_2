@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,6 +19,7 @@ class _WelcomeState extends State<Welcome> {
           margin: EdgeInsets.only(top: 34.h),
           width: 375.w,
           child: Stack(
+            alignment: Alignment.topCenter,
             children: [
               PageView(
                 children: [
@@ -43,6 +45,21 @@ class _WelcomeState extends State<Welcome> {
                       "Anywhere, anytime. The time is at our discretion so study whenever you want",
                       "image path"),
                 ],
+              ),
+              Positioned(
+                bottom: 100,
+                child: DotsIndicator(
+                  dotsCount: 3,
+                  decorator: DotsDecorator(
+                    color: Colors.grey,
+                    activeColor: Colors.blue,
+                    size: const Size.square(8.0),
+                    activeSize: const Size(10.0, 8.0),
+                    activeShape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
