@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_2/pages/sign_in/sign_in.dart';
 import 'package:ulearning_2/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_2/pages/welcome/welcome.dart';
 
@@ -13,16 +14,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => WelcomeBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          // lazy: false,
+          create: (context) => WelcomeBloc(),
+        ),
+      ],
       child: ScreenUtilInit(
-        builder: (context, child) =>
-        const MaterialApp(
+        builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: Welcome(),
+          home: const Welcome(),
+          routes: {
+            "signIn": (context) => const SignIn(),
+          },
         ),
       ),
     );
   }
 }
-

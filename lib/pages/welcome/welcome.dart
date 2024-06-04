@@ -121,7 +121,7 @@ class _WelcomeState extends State<Welcome> {
                   curve: Curves.decelerate);
             } else {
               //jump to a new page
-              // Navigator.of(context).push(MaterialPageRoute(builder: (context) => ))
+              Navigator.of(context).pushNamedAndRemoveUntil('signIn', (route) => false);
             }
           },
           child: Container(
