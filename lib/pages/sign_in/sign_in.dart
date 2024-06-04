@@ -18,7 +18,12 @@ class _SignInState extends State<SignIn> {
           backgroundColor: Colors.white,
           appBar: buildAppBar(),
           body: SingleChildScrollView(
-              child: buildThirdPartyLogin(context),
+              child: Column(
+                children: [
+                  buildThirdPartyLogin(context),
+                  reusableText("Or use your email account to login"),
+                ],
+              ),
           ),
         ),
       ),
