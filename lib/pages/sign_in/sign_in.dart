@@ -40,7 +40,8 @@ class _SignInState extends State<SignIn> {
                       buildTextField("Enter your password", "password", "lock"),
                     ],
                   ),
-                )
+                ),
+                forgotPassword(),
               ],
             ),
           ),
