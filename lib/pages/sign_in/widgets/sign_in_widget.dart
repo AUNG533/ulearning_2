@@ -138,3 +138,33 @@ Widget forgotPassword() {
     ),
   );
 }
+
+Widget buildLoginAndRegisterButton(String buttonName, String buttonType) {
+  return GestureDetector(
+    child: Container(
+      width: 325.w,
+      height: 50.h,
+      margin: EdgeInsets.only(left: 25.w, right: 25.w, top: buttonType=="login" ? 40: 20),
+      decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(15.w),
+          boxShadow: [
+            BoxShadow(
+              spreadRadius: 1,
+              offset: const Offset(0, 1),
+              color: Colors.grey.withOpacity(0.1),
+            ),
+          ]),
+      child: Center(
+        child: Text(
+          buttonName,
+          style: TextStyle(
+            fontSize: 16.sp,
+            color: Colors.white,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ),
+    ),
+  );
+}
