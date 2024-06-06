@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ulearning_2/common/widgets/flutter_toast.dart';
 import 'package:ulearning_2/pages/sign_in/bloc/sign_in_bloc.dart';
 
 class SignInController {
@@ -17,16 +18,14 @@ class SignInController {
 
         if (emailAddress.isEmpty) {
           //
-          print("email empty");
-        } else {
-          print("email is $emailAddress");
+          toastInfo(msg: "You need to fill the email address");
+          return;
         }
 
         if (password.isEmpty) {
           //
-          print("password empty");
-        } else {
-          print("password is $password");
+          toastInfo(msg: "You need to fill password");
+          return;
         }
 
         try {
@@ -35,26 +34,31 @@ class SignInController {
             email: emailAddress,
             password: password,
           );
-          if(credential.user == null){
+          if (credential.user == null) {
             //
-            print("user does not exist");
+            toastInfo(msg: "You don't exist");
+            return;
           }
-          if(!credential.user!.emailVerified){
+          if (!credential.user!.emailVerified) {
             //
-            print("not verified");
+            toastInfo(msg: "You need to verify your email account");
+            return;
           }
-          var  user = credential.user;
-          if(user != null){
+          var user = credential.user;
+          if (user != null) {
             //we got verified user from firebase
             print("user exists");
           } else {
-            print("no user");
+            toastInfo(msg: "Currently you are not a user of this app");
+            return;
           }
         } on FirebaseAuthException catch (e) {
-          if (e.code == 'user-not-found'){
-            print("No user found for that user.");
-          } else if (e.code == 'wrong-password'){
-            print("Wrong password provided for that user.");
+          if (e.code == 'user-not-found') {
+            toastInfo(msg: "No user found for that email");
+          } else if (e.code == 'wrong-password') {
+            toastInfo(msg: "Wrong password provided for that user");
+          } else {
+            toastInfo(msg: "Your email address format is wrong");
           }
         }
       }
