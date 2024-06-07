@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_2/pages/register/bloc/register_event.dart';
+import 'package:ulearning_2/pages/register/register_controller.dart';
 
 import '../common_widgets.dart';
 import 'bloc/register_bloc.dart';
@@ -84,7 +85,7 @@ class _RegisterState extends State<Register> {
                         child: reusableText(
                             "By creating account you have to agree with our them & indication")),
                     buildLoginAndRegisterButton("Sign Up", "login", () {
-                      Navigator.of(context).pushNamed("register");
+                      RegisterController(context: context).handleEmailRegister();
                     }),
                   ],
                 ),
