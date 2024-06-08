@@ -11,6 +11,7 @@ import 'package:ulearning_2/pages/sign_in/sign_in.dart';
 import 'package:ulearning_2/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_2/pages/welcome/welcome.dart';
 
+import 'common/routes/pages.dart';
 import 'global.dart';
 
 Future<void> main() async {
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: AppBlocProvider.allBlocProvider,
+      providers: [...AppPages.allBlocProviders(context)],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -35,11 +36,13 @@ class MyApp extends StatelessWidget {
             centerTitle: true,
             elevation: 0,
           )),
-          home: const ApplicationPage(),
-          routes: {
-            "signIn": (context) => const SignIn(),
-            "register": (context) => const Register(),
-          },
+          // home: const ApplicationPage(),
+          onGenerateRoute: AppPages.GenerateRouteSettings,
+          initialRoute: '/',
+          // routes: {
+          //   "signIn": (context) => const SignIn(),
+          //   "register": (context) => const Register(),
+          // },
         ),
       ),
     );
