@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning_2/common/routes/names.dart';
+import 'package:ulearning_2/pages/application/appliccation_page.dart';
+import 'package:ulearning_2/pages/application/bloc/app_blocs.dart';
 import 'package:ulearning_2/pages/register/bloc/register_bloc.dart';
 import 'package:ulearning_2/pages/register/register.dart';
 import 'package:ulearning_2/pages/welcome/bloc/welcome_bloc.dart';
@@ -27,11 +29,11 @@ class AppPages {
         page: const Register(),
         bloc: BlocProvider(create: (_) => RegisterBloc()),
       ),
-      // PageEntity(
-      //   route: AppRoutes.APPLICATION,
-      //   page: const SignIn(),
-      //   // bloc: BlocProvider(create: (_) => SignInBloc()),
-      // ),
+      PageEntity(
+        route: AppRoutes.APPLICATION,
+        page: const ApplicationPage(),
+        bloc: BlocProvider(create: (_) => AppBlocs()),
+      ),
     ];
   }
 
@@ -51,11 +53,11 @@ class AppPages {
       // check for route name matching when navigator gets triggered.
       var result = routes().where((element) => element.route == settings.name);
       if (result.isNotEmpty){
-        print('valid route name: ${settings.name}');
+        // print('valid route name: ${settings.name}');
         return MaterialPageRoute(builder: (_) => result.first.page, settings: settings);
       }
     }
-    print('invalid route name: ${settings.name}');
+    // print('invalid route name: ${settings.name}');
     return MaterialPageRoute(builder: (_) => const SignIn(), settings: settings);
   }
 }
