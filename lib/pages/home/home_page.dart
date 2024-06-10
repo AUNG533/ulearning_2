@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
             homePageText("hongsar", top: 5),
             SizedBox(height: 20.h),
             searchView(),
+            slidersView(),
           ],
         ),
       ),
