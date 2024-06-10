@@ -2,7 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning_2/common/widgets/flutter_toast.dart';
+import 'package:ulearning_2/global.dart';
 import 'package:ulearning_2/pages/sign_in/bloc/sign_in_bloc.dart';
+
+import '../../common/values/constant.dart';
 
 class SignInController {
   final BuildContext context;
@@ -48,6 +51,7 @@ class SignInController {
           if (user != null) {
             //we got verified user from firebase
             print("user exists");
+            Global.storageService.setString(AppConstants.STORAGE_USER_TOKEN_KEY,  "12345678");
             Navigator.of(context).pushNamedAndRemoveUntil("/application", (route) => false);
           } else {
             toastInfo(msg: "Currently you are not a user of this app");
