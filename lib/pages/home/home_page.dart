@@ -24,15 +24,41 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           return Container(
             margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                homePageText("Hello", color: AppColors.primaryThirdElementText),
-                homePageText("hongsar", top: 5),
-                SizedBox(height: 20.h),
-                searchView(),
-                slidersView(context, state),
-                menuView(),
+            child: CustomScrollView(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: homePageText(
+                    "Hello",
+                    color: AppColors.primaryThirdElementText,
+                  ),
+                ),
+                SliverToBoxAdapter(child: homePageText("hongsar", top: 5)),
+                SliverPadding(padding: EdgeInsets.only(top: 20.h)),
+                SliverToBoxAdapter(child: searchView()),
+                SliverToBoxAdapter(child: slidersView(context, state)),
+                SliverToBoxAdapter(child: menuView()),
+                SliverPadding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 18.h, horizontal: 0.w),
+                  sliver: SliverGrid(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 15,
+                      crossAxisSpacing: 15,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: 4,
+                        (BuildContext context, int index) {
+                      return Container(
+                        width: 100,
+                        height: 100,
+                        color: Colors.red,
+                      );
+                    }),
+                  ),
+                ),
               ],
             ),
           );
