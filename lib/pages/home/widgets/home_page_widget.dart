@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +38,8 @@ AppBar buildAppBar() {
   );
 }
 
-Widget homePageText(String text, {Color color = AppColors.primaryText, int top = 20}) {
+Widget homePageText(String text,
+    {Color color = AppColors.primaryText, int top = 20}) {
   return Container(
     margin: EdgeInsets.only(top: top.sp),
     child: Text(
@@ -50,18 +53,16 @@ Widget homePageText(String text, {Color color = AppColors.primaryText, int top =
   );
 }
 
-Widget searchView(){
+Widget searchView() {
   return Row(
     children: [
       Container(
         width: 280.w,
         height: 40.h,
-
         decoration: BoxDecoration(
-          color: AppColors.primaryBackground,
-          borderRadius: BorderRadius.circular(15.h),
-          border: Border.all(color: AppColors.primaryFourthElementText)
-        ),
+            color: AppColors.primaryBackground,
+            borderRadius: BorderRadius.circular(15.h),
+            border: Border.all(color: AppColors.primaryFourthElementText)),
         child: Row(
           children: [
             Container(
@@ -74,15 +75,14 @@ Widget searchView(){
               width: 240.w,
               height: 40.h,
               child: TextField(
-
                 keyboardType: TextInputType.multiline,
                 decoration: const InputDecoration(
                     hintText: "Search your courses",
                     contentPadding: EdgeInsets.fromLTRB(5, 5, 0, 5),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.transparent,
-                        )),
+                      color: Colors.transparent,
+                    )),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.transparent,
@@ -95,9 +95,10 @@ Widget searchView(){
                     ),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.transparent,
-                        )),
-                    hintStyle: TextStyle(color: AppColors.primarySecondaryElementText)),
+                      color: Colors.transparent,
+                    )),
+                    hintStyle: TextStyle(
+                        color: AppColors.primarySecondaryElementText)),
                 style: TextStyle(
                   color: AppColors.primaryText,
                   fontFamily: "Avenir",
@@ -117,10 +118,9 @@ Widget searchView(){
           width: 40.w,
           height: 40.h,
           decoration: BoxDecoration(
-            color: AppColors.primaryElement,
-            borderRadius: BorderRadius.all(Radius.circular(13.w)),
-            border: Border.all(color: AppColors.primaryElement)
-          ),
+              color: AppColors.primaryElement,
+              borderRadius: BorderRadius.all(Radius.circular(13.w)),
+              border: Border.all(color: AppColors.primaryElement)),
           child: Image.asset("assets/icons/options.png"),
         ),
       )
@@ -128,7 +128,7 @@ Widget searchView(){
   );
 }
 
-Widget slidersView(BuildContext context, HomePageStates state){
+Widget slidersView(BuildContext context, HomePageStates state) {
   return Column(
     children: [
       Container(
@@ -151,14 +151,13 @@ Widget slidersView(BuildContext context, HomePageStates state){
           dotsCount: 3,
           position: state.index,
           decorator: DotsDecorator(
-            color: AppColors.primaryThirdElementText,
-            activeColor: AppColors.primaryElement,
-            size: const Size.square(5.0),
-            activeSize: const Size(17.0, 5.0),
-            activeShape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0),
-            )
-          ),
+              color: AppColors.primaryThirdElementText,
+              activeColor: AppColors.primaryElement,
+              size: const Size.square(5.0),
+              activeSize: const Size(17.0, 5.0),
+              activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              )),
         ),
       )
     ],
@@ -189,8 +188,27 @@ Widget menuView() {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _reusableMenuText("Choose your course"),
-            _reusableMenuText("See all", color: AppColors.primaryThirdElementText, fontSize: 10),
+            _reusableText("Choose your course"),
+            _reusableText("See all",
+                color: AppColors.primaryThirdElementText, fontSize: 10),
+          ],
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.only(top: 20.h),
+        child: Row(
+          children: [
+            _reusableMenuText("All"),
+            _reusableMenuText(
+              "Popular",
+              textColor: AppColors.primaryThirdElementText,
+              backGroundColor: Colors.white,
+            ),
+            _reusableMenuText(
+              "Newest",
+              textColor: AppColors.primaryThirdElementText,
+              backGroundColor: Colors.white,
+            ),
           ],
         ),
       )
@@ -198,15 +216,43 @@ Widget menuView() {
   );
 }
 
-Widget _reusableMenuText(String text, {Color color = AppColors.primaryText, int fontSize = 16}){
+Widget _reusableText(
+  String text, {
+  Color color = AppColors.primaryText,
+  int fontSize = 16,
+  FontWeight fontWeight = FontWeight.bold,
+}) {
   return Container(
     child: Text(
       text,
       style: TextStyle(
         color: color,
-        fontWeight: FontWeight.bold,
+        fontWeight: fontWeight,
         fontSize: fontSize.sp,
       ),
+    ),
+  );
+}
+
+// for the menu button, reusable text
+Widget _reusableMenuText(
+  String menuText, {
+  Color textColor = AppColors.primaryElementText,
+  Color backGroundColor = AppColors.primaryElement,
+}) {
+  return Container(
+    margin: EdgeInsets.only(right: 20.w),
+    padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 5.h, bottom: 5.h),
+    decoration: BoxDecoration(
+      color: backGroundColor,
+      borderRadius: BorderRadius.circular(7.w),
+      border: Border.all(color: backGroundColor),
+    ),
+    child: _reusableText(
+      menuText,
+      color: textColor,
+      fontSize: 11,
+      fontWeight: FontWeight.normal,
     ),
   );
 }
