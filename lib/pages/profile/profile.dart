@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_2/pages/profile/widgets/profile_widgets.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -20,6 +21,11 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               profileIconAndEditButton(),
+              SizedBox(height: 30.h),
+              Padding(
+                padding: EdgeInsets.only(left: 25.w),
+                child: buildListView(),
+              ),
             ],
           ),
         ),
