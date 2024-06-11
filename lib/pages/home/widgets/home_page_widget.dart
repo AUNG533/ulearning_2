@@ -178,3 +178,35 @@ Widget _slidersContainer({String path = "assets/icons/art.png"}) {
     ),
   );
 }
+
+Widget menuView() {
+  return Column(
+    children: [
+      Container(
+        width: 325.w,
+        margin: EdgeInsets.only(top: 15.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            _reusableMenuText("Choose your course"),
+            _reusableMenuText("See all", color: AppColors.primaryThirdElementText, fontSize: 10),
+          ],
+        ),
+      )
+    ],
+  );
+}
+
+Widget _reusableMenuText(String text, {Color color = AppColors.primaryText, int fontSize = 16}){
+  return Container(
+    child: Text(
+      text,
+      style: TextStyle(
+        color: color,
+        fontWeight: FontWeight.bold,
+        fontSize: fontSize.sp,
+      ),
+    ),
+  );
+}
