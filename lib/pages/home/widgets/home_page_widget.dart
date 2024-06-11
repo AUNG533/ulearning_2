@@ -222,14 +222,12 @@ Widget _reusableText(
   int fontSize = 16,
   FontWeight fontWeight = FontWeight.bold,
 }) {
-  return Container(
-    child: Text(
-      text,
-      style: TextStyle(
-        color: color,
-        fontWeight: fontWeight,
-        fontSize: fontSize.sp,
-      ),
+  return Text(
+    text,
+    style: TextStyle(
+      color: color,
+      fontWeight: fontWeight,
+      fontSize: fontSize.sp,
     ),
   );
 }
@@ -253,6 +251,47 @@ Widget _reusableMenuText(
       color: textColor,
       fontSize: 11,
       fontWeight: FontWeight.normal,
+    ),
+  );
+}
+
+Widget courseGrid() {
+  return Container(
+    padding: EdgeInsets.all(12.w),
+    width: 100,
+    height: 100,
+    decoration: const BoxDecoration(
+      image: DecorationImage(
+          fit: BoxFit.fill,
+          image: AssetImage("assets/icons/image_2.png")),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Best course for IT",
+          overflow: TextOverflow.fade,
+          textAlign: TextAlign.left,
+          softWrap: false,
+          style: TextStyle(
+            color: AppColors.primaryElementText,
+            fontWeight: FontWeight.bold,
+            fontSize: 11.sp,
+          ),
+        ),
+        Text(
+          "Flutter best course",
+          overflow: TextOverflow.fade,
+          textAlign: TextAlign.left,
+          softWrap: false,
+          style: TextStyle(
+            color: AppColors.primaryFourthElementText,
+            fontWeight: FontWeight.normal,
+            fontSize: 11.sp,
+          ),
+        ),
+      ],
     ),
   );
 }

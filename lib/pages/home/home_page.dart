@@ -47,14 +47,15 @@ class _HomePageState extends State<HomePage> {
                       crossAxisCount: 2,
                       mainAxisSpacing: 15,
                       crossAxisSpacing: 15,
+                      childAspectRatio: 1.6,
                     ),
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: 4,
+                    delegate: SliverChildBuilderDelegate(childCount: 4,
                         (BuildContext context, int index) {
-                      return Container(
-                        width: 100,
-                        height: 100,
-                        color: Colors.red,
+                      return GestureDetector(
+                        onTap: () {
+                          print(index);
+                        },
+                        child: courseGrid(),
                       );
                     }),
                   ),
