@@ -9,6 +9,8 @@ import 'package:ulearning_2/pages/home/bloc/home_page_blocs.dart';
 import 'package:ulearning_2/pages/home/bloc/home_page_events.dart';
 import 'package:ulearning_2/pages/home/bloc/home_page_states.dart';
 
+import '../../../common/widgets/base_text_widget.dart';
+
 AppBar buildAppBar() {
   return AppBar(
     title: Container(
@@ -188,8 +190,8 @@ Widget menuView() {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _reusableText("Choose your course"),
-            _reusableText("See all",
+            reusableText("Choose your course"),
+            reusableText("See all",
                 color: AppColors.primaryThirdElementText, fontSize: 10),
           ],
         ),
@@ -216,21 +218,7 @@ Widget menuView() {
   );
 }
 
-Widget _reusableText(
-  String text, {
-  Color color = AppColors.primaryText,
-  int fontSize = 16,
-  FontWeight fontWeight = FontWeight.bold,
-}) {
-  return Text(
-    text,
-    style: TextStyle(
-      color: color,
-      fontWeight: fontWeight,
-      fontSize: fontSize.sp,
-    ),
-  );
-}
+
 
 // for the menu button, reusable text
 Widget _reusableMenuText(
@@ -246,7 +234,7 @@ Widget _reusableMenuText(
       borderRadius: BorderRadius.circular(7.w),
       border: Border.all(color: backGroundColor),
     ),
-    child: _reusableText(
+    child: reusableText(
       menuText,
       color: textColor,
       fontSize: 11,
