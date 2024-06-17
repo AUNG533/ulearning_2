@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:ulearning_2/common/entities/entities.dart';
 import 'package:ulearning_2/common/widgets/flutter_toast.dart';
 import 'package:ulearning_2/global.dart';
 import 'package:ulearning_2/pages/sign_in/bloc/sign_in_bloc.dart';
 
+import '../../common/apis/user_api.dart';
 import '../../common/values/constant.dart';
 
 class SignInController {
@@ -49,10 +55,22 @@ class SignInController {
           // }
           var user = credential.user;
           if (user != null) {
-            //we got verified user from firebase
+            String? displayName = user.displayName;
+            String? email = user.email;
+            String? id = user.uid;
+            String? photoUrl = user.photoURL;
+            print("mu url is $photoUrl");
+            LoginRequestEntity loginRequestEntity = LoginRequestEntity();
+            loginRequestEntity.avatar = photoUrl;
+            loginRequestEntity.name = displayName;
+            loginRequestEntity.email = email;
+            loginRequestEntity.open_id = id;
+            //type 1 means email login
+            loginRequestEntity.type = 1;
+
             print("user exists");
-            Global.storageService.setString(AppConstants.STORAGE_USER_TOKEN_KEY,  "12345678");
-            Navigator.of(context).pushNamedAndRemoveUntil("/application", (route) => false);
+            asyncPostAllData(loginRequestEntity);
+            
           } else {
             toastInfo(msg: "Currently you are not a user of this app");
             return;
@@ -67,6 +85,32 @@ class SignInController {
           }
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
+    EasyLoading.show(
+      indicator: const CircularProgressIndicator(),
+      maskType: EasyLoadingMaskType.clear,
+      dismissOnTap: true,
+    );
+    var result = await UserAPI.login(params: loginRequestEntity);
+    if (result.code==200) {
+
+      try {
+        Global.storageService.setString(AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data!));
+        Global.storageService.setString(AppConstants.STORAGE_USER_TOKEN_KEY,  result.data!.access_token!);
+        EasyLoading.dismiss();
+        Navigator.of(context).pushNamedAndRemoveUntil("/application", (route) => false);
+      } catch (e) {
+        print("saving local strage error ${e.toString()}");
+      }
+    } else {
+      EasyLoading.dismiss();
+      toastInfo(msg: "unknown error");
+    }
   }
 }
+  
